@@ -7,6 +7,9 @@ add_executable(${PROJECT_NAME}
     "cipher/utils/basic_transformations.h"
     "cipher/utils/basic_transformations.cpp"
     "cipher/tests/basic_transformations/basic_transformations_tests.h"
+    "cipher/tests/test_utils.h"
+    "cipher/tests/test_utils.cpp"
     "cipher/tests/basic_transformations/xor_rkey_test_suite.cpp"
-    "cipher/tests/basic_transformations/add_rkey_test_suite.cpp")
+    "cipher/tests/basic_transformations/add_rkey_test_suite.cpp"
+    "cipher/tests/basic_transformations/s_key_inv_test_suite.cpp")
 

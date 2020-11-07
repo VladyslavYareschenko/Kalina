@@ -1,8 +1,9 @@
 #include "basic_transformations_tests.h"
+
+#include "../test_utils.h"
 #include "../../utils/basic_transformations.h"
 
 #include <iostream>
-#include <mem.h>
 
 namespace
 {
@@ -43,33 +44,18 @@ std::uint64_t C_xor_rkey[9][2]={
 
 void run_xor_rkey_test()
 {
-    std::cerr << "xor_key_test STARTED!" << std::endl;
-
     constexpr size_t columns = 2;
-    constexpr size_t block_size = sizeof(std::uint64_t) * columns;
-
-    auto* matrix_begin = (std::uint8_t*)M_xor_rkey[0];
-    auto* key_begin = (std::uint8_t*)RK_xor_rkey[0];
 
     bool failed = false;
 
     for (auto i = 0; i < 9; ++i)
     {
-        xor_rkey(matrix_begin, key_begin, 2u);
+        xor_rkey(M_xor_rkey[i], RK_xor_rkey[i], columns);
 
-        if (memcmp(M_xor_rkey[i], C_xor_rkey[i], block_size))
+        if (!compare_data_row(M_xor_rkey[i], C_xor_rkey[i], columns))
         {
             failed = true;
-
-            std::cerr << "Comparison failed! Data row number: " << i + 1 << std::endl;
         }
-        else
-        {
-            std::cerr << "Comparison succeed! Data row number: " << i + 1 << std::endl;
-        }
-
-        matrix_begin += block_size;
-        key_begin += block_size;
     }
 
     if (failed)

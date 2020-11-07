@@ -1,8 +1,9 @@
 #include "basic_transformations_tests.h"
+
+#include "../test_utils.h"
 #include "../../utils/basic_transformations.h"
 
 #include <iostream>
-#include <mem.h>
 
 namespace
 {
@@ -26,42 +27,27 @@ std::uint64_t C_add_rkey[4][2]={
 }
 
 void run_add_rkey_test()
+{
+    constexpr size_t columns = 2;
+
+    bool failed = false;
+
+    for (auto i = 0; i < 4; ++i)
     {
-        std::cerr << "add_rkey_test STARTED!" << std::endl;
+        add_rkey(M_add_rkey[i], RK_add_rkey[i], columns);
 
-        constexpr size_t columns = 2;
-        constexpr size_t block_size = sizeof(std::uint64_t) * columns;
-
-        auto* matrix_begin = (unsigned int*)M_add_rkey[0];
-        auto* key_begin = (unsigned int*)RK_add_rkey[0];
-
-        bool failed = false;
-
-        for (auto i = 0; i < 4; ++i)
+        if (!compare_data_row(M_add_rkey[i], C_add_rkey[i], columns))
         {
-            add_rkey(matrix_begin, key_begin, 2u);
-
-            if (memcmp(matrix_begin, C_add_rkey[i], block_size))
-            {
-                failed = true;
-
-                std::cerr << "Comparison failed! Data row number: " << i + 1 << std::endl;
-            }
-            else
-            {
-                std::cout << "Comparison succeed! Data row number: " << i + 1 << std::endl;
-            }
-
-            matrix_begin += block_size;
-            key_begin += block_size;
-        }
-
-        if (failed)
-        {
-            std::cerr << "add_rkey_test FAILED!" << std::endl;
-        }
-        else
-        {
-            std::cerr << "add_rkey_test PASSED!" << std::endl;
+            failed = true;
         }
     }
+
+    if (failed)
+    {
+        std::cerr << "add_rkey_test FAILED!" << std::endl;
+    }
+    else
+    {
+        std::cerr << "add_rkey_test PASSED!" << std::endl;
+    }
+}
