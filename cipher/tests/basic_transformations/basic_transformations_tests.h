@@ -1,4 +1,7 @@
-#ifndef BASIC_TRANSFORMATIONS_TESTS_H
-#define BASIC_TRANSFORMATIONS_TESTS_H
+#pragma once
 
-#endif // BASIC_TRANSFORMATIONS_TESTS_H
+void run_add_rkey_test();
+void run_xor_rkey_test();
+
+#define RUN_BASIC_TRANSFORMATIONS_TESTS /*run_xor_rkey_test();*/ \
+                                        run_add_rkey_test();

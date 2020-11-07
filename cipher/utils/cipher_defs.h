@@ -1,4 +1,3 @@
-#ifndef CIPHER_DEFS_H
-#define CIPHER_DEFS_H
+#pragma once
 
-#endif // CIPHER_DEFS_H
+#define
