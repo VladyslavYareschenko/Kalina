@@ -11,5 +11,8 @@ add_executable(${PROJECT_NAME}
     "cipher/tests/test_utils.cpp"
     "cipher/tests/basic_transformations/xor_rkey_test_suite.cpp"
     "cipher/tests/basic_transformations/add_rkey_test_suite.cpp"
-    "cipher/tests/basic_transformations/s_key_inv_test_suite.cpp")
+    "cipher/tests/basic_transformations/s_key_inv_test_suite.cpp"
+    "cipher/tests/basic_transformations/s_box_test_suite.cpp"
+    "cipher/tests/basic_transformations/s_rows_test_suite.cpp"
+    "cipher/tests/basic_transformations/m_col_test_suite.cpp")
 
